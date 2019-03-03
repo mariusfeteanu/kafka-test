@@ -33,6 +33,9 @@ services:
     volumes:
       - ./conf/kafka/server.properties:/usr/local/kafka/config/server.properties
       - ./data/kafka/1:/tmp/kafka-logs
+      - ./logs/kafka/1:/var/log/kafka
+    ports:
+      - 9092:9092
     depends_on:
       - zoo1
       - zoo2

@@ -19,13 +19,17 @@ RUN chmod +x entrypoint/kafka.sh
 
 # Add user
 RUN useradd -ms /bin/bash kafka
-RUN chown kafka:kafka /tmp/kafka-logs
+
+# Data logs
+RUN mkdir -p /tmp/kafka-logs && \
+    chown kafka:kafka /tmp/kafka-logs
+
+# Application logs
 RUN mkdir -p /var/log/kafka && \
     chown kafka:kafka /var/log/kafka
+ENV LOG_DIR /var/log/kafka
+
 USER kafka
 WORKDIR /home/kafka
 
-# These are the application logs for kafka
-# not the data log (stored messages)
-ENV LOG_DIR /var/log/kafka
 ENTRYPOINT /entrypoint/kafka.sh

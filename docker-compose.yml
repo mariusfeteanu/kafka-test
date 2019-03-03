@@ -6,9 +6,9 @@ services:
       dockerfile: zoo.Dockerfile
     volumes:
       - ./data/zookeeper/1:/var/lib/zookeeper
-      - ./conf/zoo.cfg:/usr/local/zookeeper/conf/zoo.cfg
+      - ./conf/zookeeper/zoo.cfg:/usr/local/zookeeper/conf/zoo.cfg
     ports:
-            - 2181:2181
+      - 2181:2181
 
   zoo2:
     build:
@@ -16,7 +16,7 @@ services:
       dockerfile: zoo.Dockerfile
     volumes:
       - ./data/zookeeper/2:/var/lib/zookeeper
-      - ./conf/zoo.cfg:/usr/local/zookeeper/conf/zoo.cfg
+      - ./conf/zookeeper/zoo.cfg:/usr/local/zookeeper/conf/zoo.cfg
 
   zoo3:
     build:
@@ -24,4 +24,16 @@ services:
       dockerfile: zoo.Dockerfile
     volumes:
       - ./data/zookeeper/3:/var/lib/zookeeper
-      - ./conf/zoo.cfg:/usr/local/zookeeper/conf/zoo.cfg
+      - ./conf/zookeeper/zoo.cfg:/usr/local/zookeeper/conf/zoo.cfg
+
+  kafka1:
+    build:
+      context: .
+      dockerfile: kafka.Dockerfile
+    volumes:
+      - ./conf/kafka/server.properties:/usr/local/kafka/config/server.properties
+    depends_on:
+      - zoo1
+      - zoo2
+      - zoo3
+

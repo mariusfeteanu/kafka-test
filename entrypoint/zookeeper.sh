@@ -1,1 +1,1 @@
-/usr/local/zookeeper/bin/zkServer.sh start
+/usr/local/zookeeper/bin/zkServer.sh start-foreground

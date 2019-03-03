@@ -4,3 +4,24 @@ services:
     build:
       context: .
       dockerfile: zoo.Dockerfile
+    volumes:
+      - ./data/zookeeper/1:/var/lib/zookeeper
+      - ./conf/zoo.cfg:/usr/local/zookeeper/conf/zoo.cfg
+    ports:
+            - 2181:2181
+
+  zoo2:
+    build:
+      context: .
+      dockerfile: zoo.Dockerfile
+    volumes:
+      - ./data/zookeeper/2:/var/lib/zookeeper
+      - ./conf/zoo.cfg:/usr/local/zookeeper/conf/zoo.cfg
+
+  zoo3:
+    build:
+      context: .
+      dockerfile: zoo.Dockerfile
+    volumes:
+      - ./data/zookeeper/3:/var/lib/zookeeper
+      - ./conf/zoo.cfg:/usr/local/zookeeper/conf/zoo.cfg

@@ -13,7 +13,14 @@ COPY build/zookeeper.sh build/
 RUN chmod +x build/zookeeper.sh && \
     build/zookeeper.sh
 
+# Setup entrypoint
 COPY entrypoint/zookeeper.sh entrypoint/
 RUN chmod +x entrypoint/zookeeper.sh
 
-ENTRYPOINT entrypoint/zookeeper.sh
+# Add user
+RUN useradd -ms /bin/bash zk
+RUN chown zk:zk /var/lib/zookeeper
+USER zk
+WORKDIR /home/zk
+
+ENTRYPOINT /entrypoint/zookeeper.sh

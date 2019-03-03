@@ -25,5 +25,7 @@ RUN mkdir -p /var/log/kafka && \
 USER kafka
 WORKDIR /home/kafka
 
+# These are the application logs for kafka
+# not the data log (stored messages)
 ENV LOG_DIR /var/log/kafka
 ENTRYPOINT /entrypoint/kafka.sh

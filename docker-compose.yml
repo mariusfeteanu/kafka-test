@@ -32,6 +32,7 @@ services:
       dockerfile: kafka.Dockerfile
     volumes:
       - ./conf/kafka/server.properties:/usr/local/kafka/config/server.properties
+      - ./data/kafka/1:/tmp/kafka-logs
     depends_on:
       - zoo1
       - zoo2

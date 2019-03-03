@@ -31,9 +31,39 @@ services:
       context: .
       dockerfile: kafka.Dockerfile
     volumes:
-      - ./conf/kafka/server.properties:/usr/local/kafka/config/server.properties
+      - ./conf/kafka/server.1.properties:/usr/local/kafka/config/server.properties
       - ./data/kafka/1:/tmp/kafka-logs
       - ./logs/kafka/1:/var/log/kafka
+    ports:
+      - 9092:9092
+    depends_on:
+      - zoo1
+      - zoo2
+      - zoo3
+
+  kafka2:
+    build:
+      context: .
+      dockerfile: kafka.Dockerfile
+    volumes:
+      - ./conf/kafka/server.2.properties:/usr/local/kafka/config/server.properties
+      - ./data/kafka/2:/tmp/kafka-logs
+      - ./logs/kafka/2:/var/log/kafka
+    ports:
+      - 9092:9092
+    depends_on:
+      - zoo1
+      - zoo2
+      - zoo3
+
+  kafka1:
+    build:
+      context: .
+      dockerfile: kafka.Dockerfile
+    volumes:
+      - ./conf/kafka/server.3.properties:/usr/local/kafka/config/server.properties
+      - ./data/kafka/3:/tmp/kafka-logs
+      - ./logs/kafka/3:/var/log/kafka
     ports:
       - 9092:9092
     depends_on:

@@ -1,0 +1,6 @@
+version: '3'
+services:
+  zoo1:
+    build:
+      context: .
+      dockerfile: zoo.Dockerfile

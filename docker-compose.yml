@@ -67,3 +67,14 @@ services:
       - zoo2
       - zoo3
 
+  client:
+    build:
+      context: .
+      dockerfile: client.Dockerfile
+    volumes:
+      - ./client/src:/home/py/client/src
+    depends_on:
+      - kafka1
+      - kafka2
+      - kafka3
+

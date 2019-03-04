@@ -1,5 +1,8 @@
 FROM python:3.7-slim
 
+RUN apt-get update -y
+RUN apt-get install -y wget telnet iputils-ping
+
 RUN pip install pipenv
 
 # Add user

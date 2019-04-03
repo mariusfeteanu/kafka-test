@@ -2,12 +2,14 @@ import java.time.Duration
 import java.util.Properties
 
 import org.apache.kafka.streams.{KafkaStreams, StreamsConfig}
-import org.apache.kafka.streams.StreamsBuilder
+// import org.apache.kafka.streams.StreamsBuilder
+import org.apache.kafka.streams.scala.kstream._
+import org.apache.kafka.streams.scala.StreamsBuilder
 
 object MapFunctionScalaExample extends App {
 
-  // import org.apache.kafka.streams.scala.Serdes._
-  // import org.apache.kafka.streams.scala.ImplicitConversions._
+  import org.apache.kafka.streams.scala.Serdes._
+  import org.apache.kafka.streams.scala.ImplicitConversions._
 
   val config: Properties = {
     val p = new Properties()
@@ -18,17 +20,11 @@ object MapFunctionScalaExample extends App {
   }
 
   val builder = new StreamsBuilder
-  // val textLines: KStream[Array[Byte], String] = builder.stream[Array[Byte], String]("test_topic")
+  val textLines: KStream[String, String] = builder.stream[String, String]("test_topic")
 
-  // Variant 1: using `mapValues`
-  // val uppercasedWithMapValues: KStream[Array[Byte], String] = textLines.mapValues(_.toUpperCase())
-  // uppercasedWithMapValues.to("UppercasedTextLinesTopic")
-
-  // Variant 2: using `map`, modify both key and value
-  // val originalAndUppercased: KStream[String, String] = textLines.map((_, value) => (value, value.toUpperCase()))
-
-  // Write the results to a new Kafka topic "OriginalAndUppercasedTopic".
-  // originalAndUppercased.to("OriginalAndUppercasedTopic")
+  textLines.peek(
+    (key, value) => println(s"key: $key, value: $value")
+  )
 
   val streams: KafkaStreams = new KafkaStreams(builder.build(), config)
   streams.start()

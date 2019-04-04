@@ -67,6 +67,15 @@ services:
       - zoo2
       - zoo3
 
+  app_print1:
+    build:
+      context: .
+      dockerfile: app_print.Dockerfile
+    depends_on:
+      - kafka1
+      - kafka2
+      - kafka3
+
   client:
     build:
       context: .
@@ -77,4 +86,3 @@ services:
       - kafka1
       - kafka2
       - kafka3
-

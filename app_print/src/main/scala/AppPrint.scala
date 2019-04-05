@@ -34,7 +34,7 @@ object AppPrint extends App {
     .flatMapValues(textLine => textLine.toLowerCase.split("\\W+"))
     .groupBy((_, word) => word)
     .count()
-  wordCounts.toStream.to("test_topic-wordcount")
+  wordCounts.toStream.to("test_topic_wordcount")
 
   val streams: KafkaStreams = new KafkaStreams(builder.build(), config)
 

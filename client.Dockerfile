@@ -17,11 +17,11 @@ RUN mkdir -p /home/py/client/src && \
 
 WORKDIR /home/py/client
 
-COPY --chown=py:py client/Pipfile client/Pipfile.lock client/client.sh ./
+COPY --chown=py:py client/requirements.txt client/client.sh ./
 RUN chmod +x client.sh
 
-USER py
+RUN pip install -r requirements.txt
 
-RUN pipenv sync
+USER py
 
 ENTRYPOINT ./client.sh

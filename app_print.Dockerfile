@@ -1,8 +1,11 @@
-FROM debian:buster
+FROM debian:stretch
 
 # Setup java and check
 RUN apt-get update -y
 RUN apt-get install -y openjdk-8-jdk
+
+RUN apt-get install -y openjdk-8-jdk
+
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 # Needed tools and packages

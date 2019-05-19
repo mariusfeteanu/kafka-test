@@ -1,8 +1,8 @@
 FROM python:3.7-slim
 
 RUN apt-get update -y
-RUN apt-get install -y openjdk-8-jdk
-
+# no idea what this next line does
+RUN mkdir -p /usr/share/man/man1
 RUN apt-get install -y openjdk-8-jdk
 
 RUN apt-get install -y wget telnet iputils-ping

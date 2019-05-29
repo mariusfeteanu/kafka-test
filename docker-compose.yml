@@ -67,6 +67,32 @@ services:
       - zoo2
       - zoo3
 
+  kafka4:
+    build:
+      context: .
+      dockerfile: kafka.Dockerfile
+    volumes:
+      - ./conf/kafka/server.4.properties:/usr/local/kafka/config/server.properties
+      - ./data/kafka/4:/tmp/kafka-logs
+      - ./logs/kafka/4:/var/log/kafka
+    depends_on:
+      - zoo1
+      - zoo2
+      - zoo3
+
+  kafka5:
+    build:
+      context: .
+      dockerfile: kafka.Dockerfile
+    volumes:
+      - ./conf/kafka/server.5.properties:/usr/local/kafka/config/server.properties
+      - ./data/kafka/5:/tmp/kafka-logs
+      - ./logs/kafka/5:/var/log/kafka
+    depends_on:
+      - zoo1
+      - zoo2
+      - zoo3
+
   apps:
     build:
       context: .
@@ -75,6 +101,8 @@ services:
       - kafka1
       - kafka2
       - kafka3
+      - kafka4
+      - kafka5
 
   client:
     build:
@@ -86,3 +114,5 @@ services:
       - kafka1
       - kafka2
       - kafka3
+      - kafka4
+      - kafka5

@@ -1,22 +1,21 @@
+import uuid
+
 from kafka import KafkaProducer
 
 producer = KafkaProducer(bootstrap_servers='kafka1:9092')
 
 print('Pushing test events')
 
-for k in range(2):
-    producer.send('test_topic',
-                  key=bytes(str(k), encoding='utf-8'),
-                  value=b'yes there are bytes here')
+events = ['Hello there',
+          'Does this work',
+          'Putting the word the in here']
 
-for k in range(3):
-    producer.send('test_topic',
-                  key=bytes(str(k), encoding='utf-8'),
-                  value=b'what is the problem')
+for event in events:
+    for ii in range(5):
+        producer.send('test_topic',
+                      key=bytes(str(uuid.uuid1()), encoding='utf-8'),
+                      value=bytes(event, encoding='utf-8'))
 
-for k in range(5):
-    producer.send('test_topic',
-                  key=bytes(str(k), encoding='utf-8'),
-                  value=b'so how does this work')
+print('Pushed test events')
 
 producer.flush()

@@ -65,9 +65,9 @@ async def mask_pii(registered_users):
 #     enquiry_initiated = enquiry_initiated_topic.stream()
 #     enquiry_completed = enquiry_completed_topic.stream()
 #     print("STARTED: full_enquiry_completed_stream")
-#     async for event in (enquiry_initiated & enquiry_completed).join():
+#     async for event in (enquiry_initiated & enquiry_initiated):
 #         print("EVENT: ", event)
-#         yield event
+#         # yield event
 #     print("STOP: Falling out of task")
 
 #

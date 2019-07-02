@@ -16,3 +16,4 @@ If copying code from main repo:
 docker-compose run faust inno.main
 
 docker-compose run --entrypoint=bash faust
+python inno/produce.py

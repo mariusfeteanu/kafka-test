@@ -93,17 +93,6 @@ services:
       - zoo2
       - zoo3
 
-  apps:
-    build:
-      context: .
-      dockerfile: apps.Dockerfile
-    depends_on:
-      - kafka1
-      - kafka2
-      - kafka3
-      - kafka4
-      - kafka5
-
   client:
     build:
       context: .

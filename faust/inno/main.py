@@ -39,9 +39,6 @@ sale_completed_topic = app.topic('sale_completed_topic')
 
 enquiry_initiated_table = app.Table('product_date', default=int)
 
-print(RegisteredUser(account_id='kjduebvfds',
-                        email='marius.something@gmail.cob',
-                        name='Marius').to_representation())
 
 def mask_user(user):
     return RegisteredUser(
@@ -57,11 +54,11 @@ async def mask_pii(registered_users):
         masked_user = mask_user(registered_user)
         yield masked_user
 
-@app.agent(enquiry_initiated_topic)
-async def calculate_enquiries_per_date(enquiries_initiated):
-    async for enquiry_initiated in enquiries_initiated:
-        enquiry_initiated_table[(enquiry_initiated.product, enquiry_initiated.date)] += 1
-        yield enquiry_initiated
+# @app.agent(enquiry_initiated_topic)
+# async def calculate_enquiries_per_date(enquiries_initiated):
+#     async for enquiry_initiated in enquiries_initiated:
+#         enquiry_initiated_table[(enquiry_initiated.product, enquiry_initiated.date)] += 1
+#         yield enquiry_initiated
 
 # @app.task()
 # async def full_enquiry_completed_stream():
